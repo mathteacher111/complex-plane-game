@@ -1,6 +1,30 @@
-import React, { useMemo, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+function Button({ className = "", variant = "default", disabled, children, ...props }) {
+  const base = "inline-flex items-center justify-center rounded-xl px-4 py-2 font-black transition active:scale-95";
+  const styles =
+    variant === "outline"
+      ? "border-2 border-slate-300 bg-white text-slate-900 hover:bg-slate-50"
+      : variant === "secondary"
+      ? "bg-slate-200 text-slate-900 hover:bg-slate-300"
+      : "bg-slate-900 text-white hover:bg-slate-800";
 
+  return (
+    <button
+      className={`${base} ${styles} ${disabled ? "cursor-not-allowed opacity-45" : ""} ${className}`}
+      disabled={disabled}
+      {...props}
+    >
+      {children}
+    </button>
+  );
+}
+
+function Card({ className = "", children }) {
+  return <div className={`bg-white ${className}`}>{children}</div>;
+}
+
+function CardContent({ className = "", children }) {
+  return <div className={className}>{children}</div>;
+}
 const DIE_VALUES = [-2, -1, 0, 1, 2, 3];
 const OPS = ['+', '-', '×'];
 const LIMIT = 20;
